@@ -87,7 +87,7 @@ python experiments/fig11_nonlinear/generate_icp_data.py --n 100 --trial 2 --seed
 Rscript experiments/fig11_nonlinear/run_nonlinear_icp.R 100 2
 ```
 
-The generated `data_*.csv` and `true_*.csv` are temporary simulation inputs, not the published figure results, and are intentionally not bundled. Figure 11 can still be plotted directly from its bundled result CSVs.
+The nonlinear ICP experiment generates `data_*.csv` and `true_*.csv` as simulation inputs. Figure 11 can also be plotted directly from the provided result CSVs.
 
 ## Third-party software, licensing, and attribution
 
