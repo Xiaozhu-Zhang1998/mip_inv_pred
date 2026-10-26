@@ -2,8 +2,8 @@
 
 We consider two related problems for learning causal predictors from multiple environments using the **least-squares coefficient-and-risk (LSCR) invariance principle**:
 
-- **Task 1 — invariant prediction:** estimate a sparse invariant model, with convex mixed-integer optimization or a coordinate-descent heuristic (`task1.py`).
-- **Task 2 — intersection of invariant sets:** identify predictors shared across invariant sets through constrained invariance optimization, candidate supports, sample splitting, and multiplier bootstrap (`task2.py`, `bootstrap.py`).
+- **Task 1: invariant prediction:** estimate a sparse invariant model, with convex mixed-integer optimization or a coordinate-descent heuristic (`task1.py`).
+- **Task 2: intersection of invariant sets:** identify predictors shared across invariant sets through constrained invariance optimization, candidate supports, sample splitting, and multiplier bootstrap (`task2.py`, `bootstrap.py`).
 
 The package also provides nonlinear/group basis selection, a hidden confounding extension, and synthetic data generators. Independent baseline implementations and adapters live in the separate `baselines` package.
 
