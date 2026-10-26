@@ -91,4 +91,4 @@ The generated `data_*.csv` and `true_*.csv` are temporary simulation inputs, not
 
 ## Third-party software, licensing, and attribution
 
-BIP and FAIR are **external optional dependencies**. WVM is included as a Python implementation in `src/baselines/wvm.py`, so no separate WVM installation is needed. The original Julia project is MIT licensed (see `LICENSES/WVM-MIT`); the origin of the Python translation has not been verified.
+BIP and FAIR are **external optional dependencies**. WVM is included as a Python implementation in `src/baselines/wvm.py`, so no separate WVM installation is needed. The original Julia project is MIT licensed (see `LICENSES/WVM-MIT`).
