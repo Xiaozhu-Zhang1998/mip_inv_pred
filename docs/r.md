@@ -22,5 +22,3 @@ To plot the original paper Figure 11, run:
 ```bash
 Rscript experiments/fig11_nonlinear/plot.R
 ```
-
-The R executable and R packages were not present in the build environment, so R execution remains unverified. The original plotting logic has otherwise been retained.
