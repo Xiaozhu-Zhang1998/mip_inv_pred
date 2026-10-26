@@ -1,4 +1,4 @@
-"""Figure experiment; settings may require further reproducibility checks."""
+"""Figure 2: coordinate descent, MIP, and warm-started MIP (Appendix G.1)."""
 import argparse
 from pathlib import Path
 from invariant_prediction.experiment_api import *
@@ -16,8 +16,8 @@ if args.seed is not None:
 from tqdm import tqdm
 
 RS = np.zeros((0, 8))
-p_grid = [10, 20, 30, 40, 50, 60]
-n_trials = args.trials or 100
+p_grid = [10, 20, 30, 40, 50]
+n_trials = 100 if args.trials is None else args.trials
 
 pbar = tqdm(total=len(p_grid)*n_trials)
 
@@ -36,7 +36,8 @@ for p in p_grid:
             sigma_y=0.5,
             p_star_min=4,
             p_star_max=5,
-            p_resample = 0.05
+            p_resample = 0.05,
+            random_state=None if args.seed is None else int(np.random.randint(0,2**32-1))
         )
 
         # MIP-cd

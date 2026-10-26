@@ -1,4 +1,4 @@
-"""Figure experiment; settings may require further reproducibility checks."""
+"""Figure 9: testing versus number of environments (Appendix G.6)."""
 import argparse
 from pathlib import Path
 from invariant_prediction.experiment_api import *
@@ -18,8 +18,8 @@ n = 500
 
 RS = np.zeros((0, 7))
 
-for E in range(3,13):
-    for l in range(args.trials or 100):
+for E in range(3,18):
+    for l in range(200 if args.trials is None else args.trials):
         true_invariant, coef, X_list, y_list, n_list = generate_synthetic_data_all_intervention(
             n=n,
             p=p,

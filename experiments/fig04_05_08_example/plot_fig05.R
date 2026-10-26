@@ -3,9 +3,9 @@ script_path=sub('^--file=','',grep('^--file=',commandArgs(FALSE),value=TRUE)[1])
 if(!is.na(script_path)) setwd(dirname(normalizePath(script_path)))
 dir.create('figures',showWarnings=FALSE)
 pdf('figures/plot_fig05.pdf',width=10,height=5.5)
-library(dplyr)
-library(ggplot2)
 library(tidyverse)
+library(patchwork)
+library(latex2exp)
 library(cowplot)
 
 tab <- read.csv("results/RS.csv", header=FALSE) %>%

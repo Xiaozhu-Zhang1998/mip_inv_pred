@@ -1,4 +1,4 @@
-"""Figure experiment; settings may require further reproducibility checks."""
+"""Figure 7: comparison with competing methods (Appendix G.4)."""
 import argparse
 from pathlib import Path
 from invariant_prediction.experiment_api import *
@@ -19,7 +19,7 @@ if args.seed is not None:
 RS = np.zeros((0, 8))
 
 for p in [5, 10, 15, 20, 25, 30, 35, 40, 50, 60, 70, 80, 90, 100]:
-    for l in range(args.trials or 10):
+    for l in range(200 if args.trials is None else args.trials):
         n=500
         E_train=10
         if int(0.4 * p) < 16:   
@@ -42,17 +42,29 @@ for p in [5, 10, 15, 20, 25, 30, 35, 40, 50, 60, 70, 80, 90, 100]:
         super_structure_10 = ridge_screening(X_list, y_list, 10, lam=1.0, intercept=False)[0]
         super_structure_15 = ridge_screening(X_list, y_list, 15, lam=1.0, intercept=False)[0]
 
-        # MIP-cd
-        t1 = time.time()
-        stat = precompute_stat(X_list, y_list, n_list=None)
-        inv_set, B, obj = cd_msetype(
-            stat, lam=0.01, gamma1=5, rho=1, forbid=None, S_init=(), superset_init=(), tol=1e-10, max_iter=100
-        )
+        # MIP-CD: LOEO tuning over Appendix G.4's parameter grids
+        t1=time.time()
+        folds=[]
+        for e in range(len(X_list)):
+            stat_e=precompute_stat([X_list[k] for k in range(len(X_list)) if k!=e],
+                                   [y_list[k] for k in range(len(y_list)) if k!=e])
+            folds.append((stat_e,X_list[e],y_list[e]))
+        def cv_score(par):
+            lam,gamma=par
+            errors=[]
+            for stat_e,X_val,y_val in folds:
+                _,B_e,_=cd_msetype(stat_e,lam=lam,gamma1=gamma,rho=1,S_init=())
+                errors.append(np.mean((y_val-X_val@B_e[0])**2))
+            return np.mean(errors)
+        grid=((lam,gamma) for lam in (1e-4,1e-3,1e-2,1e-1,1) for gamma in (1,5,10,15,20))
+        lam_best,gamma_best=min(grid,key=cv_score)
+        stat=precompute_stat(X_list,y_list)
+        inv_set,B,obj=cd_msetype(stat,lam=lam_best,gamma1=gamma_best,rho=1,S_init=())
         t2 = time.time()
         coef_hat = B[0]
         rs = np.array([
             p,l,
-            "MIP-cd",
+            "MIP-CD",
             (np.linalg.norm(coef_hat - coef)).item(),
             set(inv_set).issuperset(set(true_invariant)),
             set(inv_set) == set(true_invariant),
@@ -78,7 +90,7 @@ for p in [5, 10, 15, 20, 25, 30, 35, 40, 50, 60, 70, 80, 90, 100]:
         coef_hat[super_structure_15] = coef_eills
         rs = np.array([
             p,l,
-            "EILLS",
+            "EILLS-s",
             (np.linalg.norm(coef_hat - coef)).item(),
             set(inv_set).issuperset(set(true_invariant)),
             set(inv_set) == set(true_invariant),
@@ -106,7 +118,7 @@ for p in [5, 10, 15, 20, 25, 30, 35, 40, 50, 60, 70, 80, 90, 100]:
         inv_set = super_structure_10[list(intersection)]
         rs = np.array([
             p,l,
-            "ICP",
+            "ICP-s",
             np.nan,
             set(inv_set).issuperset(set(true_invariant)),
             set(inv_set) == set(true_invariant),
@@ -156,7 +168,7 @@ for p in [5, 10, 15, 20, 25, 30, 35, 40, 50, 60, 70, 80, 90, 100]:
             zs=None,        # None = enumerate all subsets automatically
             xs=xs,          # list of tensors or (E, N, p) tensor
             ys=ys,          # list of tensors or (E, N) tensor
-            p_max=20,     # optional: restrict to subsets of size <= p_max
+            p_max=10,     # enumerate subsets over the ten screened predictors
             epsilon=1e-4,   # ridge jitter for OLS stability
             use_vectorize=True,         # True = faster batched computation
             include_intercept=False,     # add intercept column to X

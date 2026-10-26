@@ -1,4 +1,4 @@
-"""Figure experiment; settings may require further reproducibility checks."""
+"""Figure 3: 50 groups of 100 independent datasets (Appendix G.2)."""
 import argparse
 from pathlib import Path
 from invariant_prediction.experiment_api import *
@@ -7,6 +7,7 @@ import torch
 HERE=Path(__file__).resolve().parent
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--trials',type=int,default=None,help='Override number of replications (for a quick check)')
+parser.add_argument('--datasets-per-trial',type=int,default=100,help='Datasets per group (paper: 100)')
 parser.add_argument('--seed',type=int,default=None,help='Seed NumPy and Python random generators')
 parser.add_argument('--output',default=None,help='Generated CSV path; existing paper CSV is never overwritten')
 args=parser.parse_args()
@@ -17,10 +18,12 @@ if args.seed is not None:
 from tqdm import tqdm
 RS = np.zeros([0, 7])
 
-n_trail = args.trials or 5000
-pbar = tqdm(total = n_trail)
+n_trials=50 if args.trials is None else args.trials
+n_datasets=args.datasets_per_trial
+if n_trials<1 or n_datasets<1: raise ValueError("Trial counts must be positive")
+pbar=tqdm(total=n_trials*n_datasets)
 
-for l in range(n_trail):
+for l in range(n_trials*n_datasets):
     pbar.set_postfix(l=l)
     X_list, y_list, n_list = generate_X1_to_Y_to_X2_example(
         n_list=(500, 500),
@@ -30,7 +33,7 @@ for l in range(n_trail):
         sigma_eps2=1.0,
         a_list=(1.0, 0.5),
         v_list=(2.0, 1.5),
-        seed=None,
+        seed=None if args.seed is None else int(np.random.randint(0,2**32-1)),
         return_params=False,
     )
     E = 2
