@@ -70,13 +70,12 @@ python experiments/fig02_solver_comparison/run.py --trials 2 --seed 42
 
 New simulations write to `results/RS_generated.csv`, rather than overwriting original paper results. `--output` specifies another destination. Run `python experiments/<folder>/run.py --help` for the common command-line options. Figure 6 also has `run_tuning.py` for the right-hand tuning panel.
 
-**Important:** the uploaded notebook and the experimental statements of the paper differ in a few parameter settings and trial counts. The initial repository is an executable reorganization of the notebook, not yet a fully reconciled implementation of Appendix G. See [reproducibility notes](docs/reproducibility.md) before claiming an exact rerun of the published experiments.
 
 ## Project layout
 
 ```text
 src/invariant_prediction/    Our methods, extensions, and synthetic data
-src/baselines/              Independent baseline implementations and adapters
+src/baselines/               Independent baseline implementations and adapters
 experiments/                 Figure-by-figure simulation scripts, original CSVs, R plots
 notebooks/                   Original source notebook for comparison
 paper/                       Reference manuscript
