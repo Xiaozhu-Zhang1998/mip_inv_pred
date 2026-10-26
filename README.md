@@ -1,7 +1,5 @@
 # Convex Mixed-Integer Programming for Invariant Predictions from Multi-Environment Data
 
-Research code and figure-generation materials accompanying the manuscript by Xiaozhu Zhang, Rahul Mazumder, and Armeen Taeb. See [`paper/manuscript.pdf`](paper/manuscript.pdf).
-
 We consider two related problems for learning causal predictors from multiple environments using the **least-squares coefficient-and-risk (LSCR) invariance principle**:
 
 - **Task 1 — invariant prediction:** estimate a sparse invariant model, with convex mixed-integer optimization or a coordinate-descent heuristic (`task1.py`).
