@@ -13,6 +13,7 @@ args=parser.parse_args()
 if args.seed is not None:
     np.random.seed(args.seed)
     random.seed(args.seed)
+    torch.manual_seed(args.seed)
 
 # strong interventions
 
@@ -42,8 +43,7 @@ for p in [5, 10, 15, 20, 25, 30, 35, 40, 50, 60, 70, 80, 90, 100]:
         super_structure_10 = ridge_screening(X_list, y_list, 10, lam=1.0, intercept=False)[0]
         super_structure_15 = ridge_screening(X_list, y_list, 15, lam=1.0, intercept=False)[0]
 
-        # MIP-CD: LOEO tuning over Appendix G.4's parameter grids
-        t1=time.time()
+        # MIP-CD: select parameters by LOEO, then time the final fit
         folds=[]
         for e in range(len(X_list)):
             stat_e=precompute_stat([X_list[k] for k in range(len(X_list)) if k!=e],
@@ -58,6 +58,7 @@ for p in [5, 10, 15, 20, 25, 30, 35, 40, 50, 60, 70, 80, 90, 100]:
             return np.mean(errors)
         grid=((lam,gamma) for lam in (1e-4,1e-3,1e-2,1e-1,1) for gamma in (1,5,10,15,20))
         lam_best,gamma_best=min(grid,key=cv_score)
+        t1=time.time()
         stat=precompute_stat(X_list,y_list)
         inv_set,B,obj=cd_msetype(stat,lam=lam_best,gamma1=gamma_best,rho=1,S_init=())
         t2 = time.time()

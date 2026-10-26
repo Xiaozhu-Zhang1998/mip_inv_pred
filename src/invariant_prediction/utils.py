@@ -38,14 +38,8 @@ def loeo_mse(X_list, y_list, gamma1, rho, lam, s_max=None, verbose = 0):
     for e in range(E):
         X_train = [X_list[k] for k in range(E) if k != e]
         y_train = [y_list[k] for k in range(E) if k != e]
-        # _, B, _ = vanilla_msetype(
-        #     X_train, y_train, gamma1=gamma1, rho=rho,
-        #     lam=lam, s_max=s_max, verbose=False
-        # )
         stat = precompute_stat(X_train, y_train, n_list=None)
-        inv_set, B, obj = cd_msetype(
-            stat, lam=0.1, gamma1=5, rho=1, forbid=None, S_init=(), superset_init=(), tol=1e-10, max_iter=100
-        )
+        inv_set,B,obj=cd_msetype(stat,lam=lam,gamma1=gamma1,rho=rho,S_init=())
         beta = B[0]
         mse.append(np.mean((y_list[e] - X_list[e] @ beta) ** 2))
         if verbose:

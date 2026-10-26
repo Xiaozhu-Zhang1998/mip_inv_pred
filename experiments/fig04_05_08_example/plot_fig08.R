@@ -78,7 +78,7 @@ p3 <- plot_xy(
   c(0,1)
 )
 
-(p1 | p2 | p3) +
+final_plot <- (p1 | p2 | p3) +
   plot_layout(guides="collect") &
   theme(
     axis.title=element_text(size=9),
@@ -88,5 +88,5 @@ p3 <- plot_xy(
   guides(fill=guide_legend(nrow=1, byrow=TRUE))
 
 
-print((p1|p2|p3)+plot_layout(guides="collect"))
+print(final_plot)
 dev.off()

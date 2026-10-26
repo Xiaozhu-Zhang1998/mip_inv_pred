@@ -14,6 +14,7 @@ args=parser.parse_args()
 if args.seed is not None:
     np.random.seed(args.seed)
     random.seed(args.seed)
+    torch.manual_seed(args.seed)
 
 from tqdm import tqdm
 RS = np.zeros([0, 7])

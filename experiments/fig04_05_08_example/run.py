@@ -1,4 +1,4 @@
-"""Figure experiment; settings may require further reproducibility checks."""
+"""Figures 4, 5, and 8: illustrative example and testing comparisons."""
 import argparse
 from pathlib import Path
 from invariant_prediction.experiment_api import *

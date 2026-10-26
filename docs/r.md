@@ -7,7 +7,7 @@ Each experiment includes R scripts for generating figures from the CSV results i
 Install the R plotting packages:
 
 ```r
-install.packages(c("tidyverse","dplyr","ggplot2","patchwork","cowplot","latex2exp","readr"))
+install.packages(c("tidyverse","patchwork","cowplot","latex2exp"))
 ```
 
 For example, to reproduce Figure 7 from the provided results, run the following command from the repository root:

@@ -46,7 +46,7 @@ p2 <- plot_box("time", "Runtime (secs)") +
     labels=scales::label_log(base=10)
   )
 
-(p1 | p2) +
+final_plot <- (p1 | p2) +
   plot_layout(guides="collect") &
   theme(
     legend.position="bottom",
@@ -55,5 +55,5 @@ p2 <- plot_box("time", "Runtime (secs)") +
   ) &
   guides(color=guide_legend(nrow=1))
 
-print((p1|p2)+plot_layout(guides="collect"))
+print(final_plot)
 dev.off()

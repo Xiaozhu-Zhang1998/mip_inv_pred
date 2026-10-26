@@ -77,7 +77,7 @@ src/invariant_prediction/    Our methods, extensions, and synthetic data
 src/baselines/               Independent baseline implementations and adapters
 experiments/                 Figure by figure simulation scripts, original CSVs, R plots
 tests/                       Lightweight method and packaging tests
-docs/                        External dependency, R, and reproducibility notes
+docs/                        External dependency and R instructions
 ```
 
 For the nonlinear ICP R experiment, generate the required data files first:

@@ -30,4 +30,4 @@ Other baselines:
 
 The `baselines` Python package is a sibling of `invariant_prediction` under `src/`, not a submodule of the proposed methodology. Imports such as `from baselines.eills import fit_eills` are supported after `pip install -e .`.
 
-The core Task 1 and Task 2 coordinate descent methods do **not** require BIP, FAIR, or other optional baseline packages. Exact MIP requires Gurobi and a suitable license. The supplied CSVs let you reproduce existing figures without running baselines.
+The core Task 1 and Task 2 coordinate descent methods do **not** require BIP, FAIR, or other optional baseline packages. Exact MIP requires Gurobi and a suitable license. The included CSV results can be used to generate figures without running baselines.

@@ -1,8 +1,6 @@
 """Baseline implementation; see docs/baselines.md for sources and setup."""
 import numpy as np
 
-import numpy as np
-
 def irm_linear(
     X_list, y_list,
     penalty_weight=1e4,

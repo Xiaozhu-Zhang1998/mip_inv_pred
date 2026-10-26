@@ -58,3 +58,28 @@ def test_wvm_local_screening():
     score,causes,obj,pvals,threshold=WV_screening(wv,B=3)
     assert score.shape==causes.shape==pvals.shape==(3,)
     assert np.isfinite(obj) and np.isfinite(threshold)
+
+
+def test_loeo_uses_parameters():
+    from invariant_prediction.utils import loeo_mse
+    _,_,X,y,_=synthetic()
+    lam,gamma,rho=.02,2.,.4
+    expected=[]
+    for e in range(len(X)):
+        Xt=[x for i,x in enumerate(X) if i!=e]
+        yt=[z for i,z in enumerate(y) if i!=e]
+        _,B,_=cd_msetype(precompute_stat(Xt,yt),lam=lam,gamma1=gamma,rho=rho,S_init=())
+        expected.append(np.mean((y[e]-X[e]@B[0])**2))
+    assert np.isclose(loeo_mse(X,y,gamma1=gamma,rho=rho,lam=lam),np.mean(expected))
+
+def test_experiment_parameter_grids():
+    from pathlib import Path
+    base=Path(__file__).resolve().parents[1]/'experiments'
+    f2=(base/'fig02_solver_comparison'/'run.py').read_text()
+    f3=(base/'fig03_identification'/'run.py').read_text()
+    f7=(base/'fig07_baselines'/'run.py').read_text()
+    f9=(base/'fig09_testing'/'run.py').read_text()
+    assert 'p_grid = [10, 20, 30, 40, 50]' in f2 and 'n_trials = 100' in f2
+    assert 'n_trials=50' in f3 and 'default=100' in f3
+    assert 'range(200 if args.trials is None' in f7 and 'lam_best,gamma_best=min(grid,key=cv_score)' in f7
+    assert 'range(3,18)' in f9 and 'range(200 if args.trials is None' in f9

@@ -39,8 +39,9 @@ for E in range(3,18):
         n_es = n_list                  # e.g. [500, 500, 500]
         n_total = sum(n_es)
         
+        split_seed=0 if args.seed is None else int(np.random.randint(0,2**32-1))
         X_train_list, y_train_list, n_train_list, X_test_list, y_test_list, n_test_list = train_test_split_envs(
-            X_list, y_list, test_size=.8
+            X_list, y_list, test_size=.8, seed=split_seed
         )
 
         ## MIP-2
@@ -49,6 +50,7 @@ for E in range(3,18):
             X_train_list, y_train_list, n_train_list, X_test_list, y_test_list, n_test_list, 
             superset=[j for j in range(p)], gamma=(1,1,0,0), alpha=.05,
             M_bar=3, B=500, solver="cd", verbose=0,
+            random_state=None if args.seed is None else int(np.random.randint(0,2**32-1)),
         )
         t2 = time.time()
         rs = np.array([
@@ -68,6 +70,7 @@ for E in range(3,18):
             X_train_list, y_train_list, n_train_list, X_test_list, y_test_list, n_test_list, 
             superset=[j for j in range(p)], gamma=(1,1,1,1), alpha=.05,
             M_bar=3, B=500, solver="cd", verbose=0,
+            random_state=None if args.seed is None else int(np.random.randint(0,2**32-1)),
         )
         t2 = time.time()
         inv_set

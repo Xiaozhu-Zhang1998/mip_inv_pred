@@ -2,7 +2,6 @@
 
 Reference: https://github.com/astrzalk/WVM_reproducibility
 Original Julia code: Alexander Strzalkowski (MIT); see LICENSES/WVM-MIT.
-The authorship and original distribution of the supplied Python port are unverified.
 """
 
 import numpy as np
