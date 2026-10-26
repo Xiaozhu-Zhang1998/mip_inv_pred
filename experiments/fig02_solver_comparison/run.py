@@ -16,7 +16,7 @@ if args.seed is not None:
 from tqdm import tqdm
 
 RS = np.zeros((0, 8))
-p_grid = [10, 20, 30, 40, 50, 60]
+p_grid = [10, 20, 30, 40, 50]
 n_trials = args.trials or 100
 
 pbar = tqdm(total=len(p_grid)*n_trials)
