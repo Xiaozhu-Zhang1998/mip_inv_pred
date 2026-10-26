@@ -16,7 +16,7 @@ If the downloaded package folders have these exact names, use:
 export PYTHONPATH="/absolute/path/to/external:/absolute/path/to/external/FAIR:$PYTHONPATH"
 ```
 
-For BIP, the comparison code calls `bip.core_utils.pi_analytical` and `bip.utils.get_all_zs`. Source: [BayesianInvariantPrediction](https://github.com/LuhuanWu/BayesianInvariantPrediction). The uploaded ZIP only contains `bip/` and no upstream commit reference; verify the exact revision before full reproduction.
+For BIP, the comparison code calls `bip.core_utils.pi_analytical` and `bip.utils.get_all_zs`. Source: [BayesianInvariantPrediction](https://github.com/LuhuanWu/BayesianInvariantPrediction). 
 
 For FAIR, the comparison code uses `FAIR.methods.fair_algo.FairMLP`, `FairGumbelAlgo`, and `FAIR.utils.aos_default_hyper_params`. Source: [FAIR](https://github.com/wmyw96/FAIR). Upstream `FAIR.methods.fair_algo` imports `data.utils`, so the FAIR root must also be on `PYTHONPATH`. Use the original upstream repository's installation instructions rather than copying individual files into this one.
 
