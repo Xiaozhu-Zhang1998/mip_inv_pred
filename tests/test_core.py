@@ -46,3 +46,15 @@ def test_baselines_sibling_import():
     from invariant_prediction.experiment_api import fit_eills as experiment_eills
     assert callable(fit_eills) and callable(pi_analytical)
     assert experiment_eills is fit_eills
+
+
+def test_wvm_local_screening():
+    from baselines.wvm import DirectWassersteinVariance,WV_screening
+    rng=np.random.default_rng(12)
+    X=rng.normal(size=(40,3))
+    y=X[:,0]+rng.normal(size=40)
+    wv=DirectWassersteinVariance(X,y,[20,20],np.array([.5,.5]))
+    np.random.seed(12)
+    score,causes,obj,pvals,threshold=WV_screening(wv,B=3)
+    assert score.shape==causes.shape==pvals.shape==(3,)
+    assert np.isfinite(obj) and np.isfinite(threshold)

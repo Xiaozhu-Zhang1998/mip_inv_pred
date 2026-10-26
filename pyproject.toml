@@ -16,5 +16,8 @@ torch=["torch>=2"]
 all=["gurobipy>=11","torch>=2"]
 test=["pytest>=7"]
 
+[tool.setuptools]
+license-files=["LICENSES/WVM-MIT"]
+
 [tool.setuptools.packages.find]
 where=["src"]

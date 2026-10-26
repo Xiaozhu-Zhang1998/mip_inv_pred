@@ -21,7 +21,7 @@ This installs the core methods. To run exact MIP, install Gurobi and ensure that
 python -m pip install -e '.[mip]'
 ```
 
-Several experiments require PyTorch (`pip install -e '.[torch]'`) and separately downloaded baseline methods; see [baseline instructions](docs/baselines.md). R is only needed for plotting or nonlinear ICP; see [R instructions](docs/r.md).
+Several experiments require PyTorch (`pip install -e '.[torch]'`) and separate BIP and FAIR installations; see [baseline instructions](docs/baselines.md). R is only needed for plotting or nonlinear ICP; see [R instructions](docs/r.md).
 
 ## Quick example
 
@@ -91,4 +91,4 @@ The generated `data_*.csv` and `true_*.csv` are temporary simulation inputs, not
 
 ## Third-party software, licensing, and attribution
 
-BIP, FAIR, and WVM are **external optional dependencies** and their source code is not included. 
+BIP and FAIR are **external optional dependencies**. WVM is included as a Python implementation in `src/baselines/wvm.py`, so no separate WVM installation is needed. The original Julia project is MIT licensed (see `LICENSES/WVM-MIT`); the origin of the Python translation has not been verified.
