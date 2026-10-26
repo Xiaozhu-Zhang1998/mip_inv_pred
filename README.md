@@ -95,4 +95,4 @@ The generated `data_*.csv` and `true_*.csv` are temporary simulation inputs, not
 
 ## Third-party software, licensing, and attribution
 
-BIP, FAIR, and WVM are **external optional dependencies** and their source code is not included. The notebook-derived local EILLS baseline is credited to its upstream project in `docs/baselines.md`; review its source license before redistributing it. No license has yet been selected for the authors' original code in this repository. Choose and add an appropriate `LICENSE` before publishing it as open-source software.
+BIP, FAIR, and WVM are **external optional dependencies** and their source code is not included. 
