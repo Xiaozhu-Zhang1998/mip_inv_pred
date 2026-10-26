@@ -1,11 +1,9 @@
 # Convex Mixed-Integer Programming for Invariant Predictions from Multi-Environment Data
 
-Research code and figure-generation materials for the work by Xiaozhu Zhang, Rahul Mazumder, and Armeen Taeb.
-
 We consider two related problems for learning causal predictors from multiple environments using the **least-squares coefficient-and-risk (LSCR) invariance principle**:
 
-- **Task 1 — invariant prediction:** estimate a sparse invariant model, with convex mixed-integer optimization or a coordinate-descent heuristic (`task1.py`).
-- **Task 2 — intersection of invariant sets:** identify predictors shared across invariant sets through constrained invariance optimization, candidate supports, sample splitting, and multiplier bootstrap (`task2.py`, `bootstrap.py`).
+- **Task 1: invariant prediction:** estimate a sparse invariant model, with convex mixed-integer optimization or a coordinate-descent heuristic (`task1.py`).
+- **Task 2: intersection of invariant sets:** identify predictors shared across invariant sets through constrained invariance optimization, candidate supports, sample splitting, and multiplier bootstrap (`task2.py`, `bootstrap.py`).
 
 The package also provides nonlinear/group basis selection, a hidden confounding extension, and synthetic data generators. Independent baseline implementations and adapters live in the separate `baselines` package.
 
@@ -40,7 +38,6 @@ S_hat,B,obj=cd_msetype(precompute_stat(X_list,y_list),lam=.01,gamma1=5,rho=1)
 print(S_hat)
 ```
 
-The coordinate-descent example does not require Gurobi or external baselines. See `tests/` for small Task 1, Task 2, and nonlinear smoke checks.
 
 ## Paper experiments and figures
 
@@ -70,16 +67,15 @@ Generate new Figure 2 simulation results after installing Gurobi:
 python experiments/fig02_solver_comparison/run.py --trials 2 --seed 42
 ```
 
-New simulations write to `results/RS_generated.csv`, rather than overwriting original paper results. `--output` specifies another destination. Run `python experiments/<folder>/run.py --help` for the common command-line options. Figure 6 also has `run_tuning.py` for the right-hand tuning panel.
+New simulations write to `results/RS_generated.csv`, rather than overwriting original paper results. `--output` specifies another destination. Run `python experiments/<folder>/run.py --help` for the common command options. Figure 6 also has `run_tuning.py` for the right hand tuning panel.
 
-**Important:** some current simulation settings differ from the experimental protocol reported in Appendix G. See the [reproducibility notes](docs/reproducibility.md) before treating a new run as an exact reproduction of the published experiments.
 
 ## Project layout
 
 ```text
 src/invariant_prediction/    Our methods, extensions, and synthetic data
-src/baselines/              Independent baseline implementations and adapters
-experiments/                 Figure-by-figure simulation scripts, original CSVs, R plots
+src/baselines/               Independent baseline implementations and adapters
+experiments/                 Figure by figure simulation scripts, original CSVs, R plots
 tests/                       Lightweight method and packaging tests
 docs/                        External dependency, R, and reproducibility notes
 ```
@@ -95,4 +91,4 @@ The generated `data_*.csv` and `true_*.csv` are temporary simulation inputs, not
 
 ## Third-party software, licensing, and attribution
 
-BIP, FAIR, and WVM are **external optional dependencies** and their source code is not included. The local EILLS baseline is credited to its upstream project in `docs/baselines.md`; review its source license before redistributing it. No license has yet been selected for the authors' original code in this repository. Choose and add an appropriate `LICENSE` before publishing it as open-source software.
+BIP, FAIR, and WVM are **external optional dependencies** and their source code is not included. 
