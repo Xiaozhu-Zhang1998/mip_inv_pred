@@ -20,7 +20,7 @@ For BIP, the comparison code calls `bip.core_utils.pi_analytical` and `bip.utils
 
 For FAIR, the comparison code uses `FAIR.methods.fair_algo.FairMLP`, `FairGumbelAlgo`, and `FAIR.utils.aos_default_hyper_params`. Source: [FAIR](https://github.com/wmyw96/FAIR). Upstream `FAIR.methods.fair_algo` imports `data.utils`, so the FAIR root must also be on `PYTHONPATH`. Use the original upstream repository's installation instructions rather than copying individual files into this one.
 
-For WVM, the Python implementation is included in `src/baselines/wvm.py`, providing `DirectWassersteinVariance` and `WV_screening`. It is a translation based on the original [WVM Julia implementation](https://github.com/astrzalk/WVM_reproducibility). The original Julia project is MIT licensed (see `LICENSES/WVM-MIT`). The origin of this Python translation has not been verified; it should not be described as an official release by the original authors.
+For WVM, the Python implementation is included in `src/baselines/wvm.py`, providing `DirectWassersteinVariance` and `WV_screening`. It is a translation based on the original [WVM Julia implementation](https://github.com/astrzalk/WVM_reproducibility). The original Julia project is MIT licensed (see `LICENSES/WVM-MIT`). 
 
 Other baselines:
 
