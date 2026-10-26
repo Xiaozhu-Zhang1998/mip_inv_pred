@@ -1,4 +1,4 @@
-"""Experiment extracted from summary_pipeline.ipynb; parameters not yet reconciled."""
+"""Figure experiment; settings may require further reproducibility checks."""
 import argparse
 from pathlib import Path
 from invariant_prediction.experiment_api import *
@@ -14,7 +14,6 @@ if args.seed is not None:
     np.random.seed(args.seed)
     random.seed(args.seed)
 
-# Notebook cell 120
 from pathlib import Path
 
 # Settings
@@ -102,7 +101,6 @@ def construct_trials(n_trials=N_TRIALS, e_values=E_VALUES, base_seed=BASE_SEED):
 
 X_trials, y_trials, env_trials = construct_trials(n_trials=N_TRIALS)
 
-# Notebook cell 121
 TRUE_SUPPORT_IDX = np.array([0, 1, 2, 3, 4])
 
 def selection_metrics(selected, true_support=TRUE_SUPPORT_IDX):
@@ -116,7 +114,6 @@ def selection_metrics(selected, true_support=TRUE_SUPPORT_IDX):
     # fdr = fp / max(1, len(selected))
     return {"tp": tp, "fp": fp, "fn": fn, "size": len(selected)}
 
-# Notebook cell 123
 RS = np.zeros((0, 8))
 
 for l in range(N_TRIALS):
@@ -249,7 +246,7 @@ for l in range(N_TRIALS):
         print('finished', 'l=', l, 'e=', e)
         print(RS[(RS.shape[0]-6):RS.shape[0],:])
 
-# Preserve manuscript-independent result file locations.
+# Keep figure data and generated outputs in separate files.
 output=Path(args.output) if args.output else HERE/'results'/'RS_generated.csv'
 output.parent.mkdir(parents=True,exist_ok=True)
 pd.DataFrame(RS).to_csv(output,index=False,header=False)

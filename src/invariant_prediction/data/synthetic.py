@@ -1,7 +1,6 @@
-"""Generators for the synthetic experiments and manuscript examples."""
+"""Generators for synthetic experiments and illustrative examples."""
 import numpy as np
 
-# From original notebook, cell 77
 def generate_synthetic_data_all_intervention(
     n, p, E, p_act, lb, ub, lb_star, ub_star,
     sigma_x_min, sigma_x_max, sigma_y,
@@ -53,7 +52,6 @@ def generate_synthetic_data_all_intervention(
 
     return S_star, beta_star, X_list, y_list, [n] * E
 
-# From original notebook, cell 79
 def generate_synthetic_data_soft_intervention(
     n, p, E, p_act, lb, ub, lb_star, ub_star,
     sigma_x_min, sigma_x_max, sigma_y,
@@ -135,7 +133,6 @@ def generate_synthetic_data_soft_intervention(
 
     return S_star, beta_star, X_list, y_list, [n] * E
 
-# From original notebook, cell 81
 def generate_X1_to_Y_to_X2_example(
     n_list=(1000, 1000),
     k_independent=0,
@@ -293,7 +290,6 @@ def generate_X1_to_Y_to_X2_example(
 
     return X_list, y_list, n_list, params
 
-# From original notebook, cell 83
 def generate_multiple_invariant(
     n_train, n_test, k=5, noise_std=.5,
     lbd=.5, ubd=2., perturb_strength=3, seed=None
@@ -359,7 +355,6 @@ def generate_multiple_invariant(
         X_test_list, y_test_list, n_test_list, coef
     )
 
-# From original notebook, cell 85
 def generate_hidden_sem_data(
     n, E, p_a=None, p_s=4, p_d=None, k=8, q=2,
     beta=None, Gamma_A=None, B_AS=None, Gamma_S=None,
@@ -433,7 +428,6 @@ def generate_hidden_sem_data(
 
     return X_list, y_list, n_list, A, S, D, I, true_coef, params
 
-# From original notebook, cell 87
 def generate_synthetic_data_all_intervention_nonlinear(
     n, p, E, p_act, lb, ub, lb_star, ub_star,
     sigma_x_min, sigma_x_max, sigma_y,

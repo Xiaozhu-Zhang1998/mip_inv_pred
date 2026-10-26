@@ -1,4 +1,4 @@
-"""Compact imports shared by the manuscript experiment scripts."""
+"""Compact imports shared by the figure experiment scripts."""
 import time,random
 from functools import reduce
 from itertools import combinations

@@ -1,7 +1,6 @@
 """Task 1 extension for noise interventions with hidden confounding."""
 import numpy as np
 
-# From original notebook, cell 40
 def vanilla_msetype_additive(
     X_list, y_list, n_list=None, gamma=1., lam=1.,
     w=None, w_pair=None, s_max=None, beta_bound=100.,

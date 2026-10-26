@@ -1,7 +1,6 @@
 """Nonlinear extension: basis expansion and group subset selection."""
 import numpy as np
 
-# From original notebook, cell 43
 from sklearn.preprocessing import SplineTransformer
 
 def spline_expand(X_list, degree=3, n_knots=3, knots="quantile", standardize=True):
@@ -31,7 +30,6 @@ def spline_expand(X_list, degree=3, n_knots=3, knots="quantile", standardize=Tru
 
     return [np.hstack(Z) for Z in Z_blocks], groups, basis_info
 
-# From original notebook, cell 44
 def fourier_expand(X_list, K=1):
     X_list = [np.asarray(X, float) for X in X_list]
     E, p = len(X_list), X_list[0].shape[1]
@@ -49,7 +47,6 @@ def fourier_expand(X_list, K=1):
 
     return [np.hstack(Z) for Z in Z_blocks], groups
 
-# From original notebook, cell 45
 def precompute_stat(X_list, y_list, n_list=None):
     X_list = [np.asarray(X, float) for X in X_list]
     y_list = [np.asarray(y, float).reshape(-1) for y in y_list]
@@ -72,14 +69,12 @@ def precompute_stat(X_list, y_list, n_list=None):
         "XtX_pool": np.sum(XtX, axis=0)
     }
 
-# From original notebook, cell 46
 def group_cols(S, groups):
     S = sorted(set(map(int, S)))
     if len(S) == 0:
         return np.array([], int)
     return np.sort(np.concatenate([groups[j] for j in S]))
 
-# From original notebook, cell 47
 def compute_B_given_groups(S, stat, groups, rcond=1e-10):
     A, E, R = group_cols(S, groups), stat["E"], stat["XtX_pool"].shape[0]
     B = np.zeros((E + 1, R))
@@ -96,7 +91,6 @@ def compute_B_given_groups(S, stat, groups, rcond=1e-10):
 
     return B
 
-# From original notebook, cell 48
 def compute_mse_obj_given_groups(
     B, S, stat, gamma1=1., rho=1., lam=0., return_parts=False
 ):
@@ -135,7 +129,6 @@ def compute_mse_obj_given_groups(
         "total": obj
     }
 
-# From original notebook, cell 49
 def cd_msetype_grouped(
     stat, groups, lam, gamma1, rho,
     forbid=None, S_init=(), superset_init=(),

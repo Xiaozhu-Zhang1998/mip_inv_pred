@@ -1,7 +1,6 @@
-"""Baseline implementation from the supplied research notebook. See docs/baselines.md."""
+"""Baseline implementation; see docs/baselines.md for sources and setup."""
 import numpy as np
 
-# From original notebook, cell 61
 # Adapted from the official code repo https://github.com/wmyw96/EILLS
 # Paper link: https://arxiv.org/pdf/2303.03092
 

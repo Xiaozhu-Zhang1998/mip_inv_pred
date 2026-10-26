@@ -1,8 +1,7 @@
-"""Baseline implementation from the supplied research notebook. See docs/baselines.md."""
+"""Baseline implementation; see docs/baselines.md for sources and setup."""
 import numpy as np
 from scipy import stats
 
-# From original notebook, cell 59
 # causal Danztig (aka hiddenICP) implementation in Python
 # Code translated by ChatGPT from the Invariant Causal Prediction R package https://cran.r-project.org/web/packages/InvariantCausalPrediction/index.html
 from scipy.stats import t, norm

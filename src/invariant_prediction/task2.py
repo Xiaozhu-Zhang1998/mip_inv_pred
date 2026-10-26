@@ -1,7 +1,6 @@
 """Task 2: minimum invariance scores excluding a feature."""
 import numpy as np
 
-# From original notebook, cell 17
 def vanilla_testtype(
     X_list, y_list, k0, n_list=None, gamma=(1,1,1,1),
     s_max=None, beta_bound=100., S_start=None, B_start=None,
@@ -172,7 +171,6 @@ def vanilla_testtype(
 
     return model.ObjVal, B, g_sol
 
-# From original notebook, cell 19
 def precompute_stat_test(X_list, y_list, n_list=None):
     E = len(X_list)
     n = np.array([len(y) for y in y_list], float) if n_list is None else np.asarray(n_list, float)
@@ -191,7 +189,6 @@ def precompute_stat_test(X_list, y_list, n_list=None):
         "XtX_pool": np.sum(XtX, axis=0)
     }
 
-# From original notebook, cell 20
 def _add_feature_single(beta, S, Ginv, j, XtX, Xty, tol=1e-12):
     S, p = np.asarray(S, int), len(beta)
     if j in S: raise ValueError(f"j={j} already in S.")
@@ -220,7 +217,6 @@ def _add_feature_single(beta, S, Ginv, j, XtX, Xty, tol=1e-12):
     beta_new[S_new] = G_new @ Xty[S_new]
     return beta_new, S_new, G_new
 
-# From original notebook, cell 21
 def add_feature_to_B_ols(B, S, j, Gp, Ge, stat, tol=1e-12):
     E = stat["E"]
     B_new = np.zeros_like(B, float)
@@ -239,7 +235,6 @@ def add_feature_to_B_ols(B, S, j, Gp, Ge, stat, tol=1e-12):
 
     return B_new, S_new, Gp_new, Ge_new
 
-# From original notebook, cell 22
 def _remove_feature_single(beta, S, Ginv, j, Xty, tol=1e-12):
     S, p = np.asarray(S, int), len(beta)
     if j not in S: raise ValueError(f"j={j} not in S.")
@@ -258,7 +253,6 @@ def _remove_feature_single(beta, S, Ginv, j, Xty, tol=1e-12):
     beta_new[S_new] = G_new @ Xty[S_new]
     return beta_new, S_new, G_new
 
-# From original notebook, cell 23
 def remove_feature_from_B_ols(B, S, j, Gp, Ge, stat, tol=1e-12):
     E = stat["E"]
     B_new = np.zeros_like(B, float)
@@ -277,7 +271,6 @@ def remove_feature_from_B_ols(B, S, j, Gp, Ge, stat, tol=1e-12):
 
     return B_new, S_new, Gp_new, Ge_new
 
-# From original notebook, cell 24
 def compute_Ginv_given_S(S, stat):
     S, E = np.asarray(S, int), stat["E"]
     if len(S) == 0:
@@ -290,7 +283,6 @@ def compute_Ginv_given_S(S, stat):
     ]
     return Gp, Ge
 
-# From original notebook, cell 25
 def compute_B_given_S(S, stat):
     S = np.asarray(S, int)
     E, p = stat["E"], stat["XtX_pool"].shape[0]
@@ -304,7 +296,6 @@ def compute_B_given_S(S, stat):
 
     return B
 
-# From original notebook, cell 26
 def compute_test_obj_given_S(B, S, stat, gamma, return_parts=False):
     gamma = np.asarray(gamma, float)
     if gamma.shape != (4,) or np.any(gamma < 0):
@@ -352,7 +343,6 @@ def compute_test_obj_given_S(B, S, stat, gamma, return_parts=False):
         }
     return obj
 
-# From original notebook, cell 27
 def cd_testtype(
     stat, k0, gamma = (1,1,1,1),
     forbid=None, S_init=(), superset_init=(), tol=1e-10, max_iter=100

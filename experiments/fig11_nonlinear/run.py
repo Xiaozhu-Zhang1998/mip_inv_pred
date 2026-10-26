@@ -1,4 +1,4 @@
-"""Experiment extracted from summary_pipeline.ipynb; parameters not yet reconciled."""
+"""Figure experiment; settings may require further reproducibility checks."""
 import argparse
 from pathlib import Path
 from invariant_prediction.experiment_api import *
@@ -14,7 +14,6 @@ if args.seed is not None:
     np.random.seed(args.seed)
     random.seed(args.seed)
 
-# Notebook cell 125
 RS = np.zeros((0, 6))
 
 for l in range(args.trials or 100):
@@ -97,7 +96,7 @@ for l in range(args.trials or 100):
         print('finished', 'l=', l, 'e=', e)
         print(RS[(RS.shape[0]-3):RS.shape[0],:])
 
-# Preserve manuscript-independent result file locations.
+# Keep figure data and generated outputs in separate files.
 output=Path(args.output) if args.output else HERE/'results'/'RS_generated.csv'
 output.parent.mkdir(parents=True,exist_ok=True)
 pd.DataFrame(RS).to_csv(output,index=False,header=False)

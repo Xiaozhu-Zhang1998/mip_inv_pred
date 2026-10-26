@@ -1,7 +1,6 @@
 """FAIR adapter; download the upstream FAIR package separately."""
 from copy import deepcopy
 
-# From original notebook, cell 73
 from copy import deepcopy
 
 def fit_fair_nn(X_list, y_list, gamma=36, niters=10000,

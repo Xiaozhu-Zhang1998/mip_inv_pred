@@ -3,7 +3,6 @@ import numpy as np
 from itertools import combinations
 from .task2 import precompute_stat_test,cd_testtype,vanilla_testtype
 
-# From original notebook, cell 29
 def train_test_split_envs(X_list, y_list, test_size=.5, seed=0, shuffle=True):
     rng = np.random.default_rng(seed)
     X_train, y_train, X_test, y_test = [], [], [], []
@@ -22,7 +21,6 @@ def train_test_split_envs(X_list, y_list, test_size=.5, seed=0, shuffle=True):
 
     return X_train, y_train, n_train_list, X_test, y_test, n_test_list
 
-# From original notebook, cell 31
 def _pinv(A, rcond=1e-10):
     return np.linalg.pinv(A, rcond=rcond)
 
@@ -36,7 +34,6 @@ def _pooled_ols(X_list, y_list, S, rcond=1e-10):
     Xty = sum(X[:, S].T @ y for X, y in zip(X_list, y_list))
     return _pinv(XtX, rcond) @ Xty
 
-# From original notebook, cell 32
 def _bootstrap_cache(X_list, y_list, n_list, S, rcond=1e-10):
     S, N = np.asarray(S, int), int(np.sum(n_list))
     d = len(S)
@@ -64,7 +61,6 @@ def _bootstrap_cache(X_list, y_list, n_list, S, rcond=1e-10):
     Spinv = _pinv(Sigma_pool/N, rcond) if d else np.zeros((0,0))
     return {"S": S, "d": d, "Spinv": Spinv, "env": env}
 
-# From original notebook, cell 33
 def bootstrap_testtype(
     X_list, y_list, n_list, S_list, gamma=(1,1,1,1),
     B=300, random_state=None, rcond=1e-10, raw_scale=True
@@ -140,7 +136,6 @@ def bootstrap_testtype(
 
     return boot/N if raw_scale else boot
 
-# From original notebook, cell 34
 def bootstrap_env_data(X_list, y_list, n_list, rng=None):
     rng = np.random.default_rng() if rng is None else rng
     Xb, yb = [], []
@@ -152,7 +147,6 @@ def bootstrap_env_data(X_list, y_list, n_list, rng=None):
 
     return Xb, yb, np.asarray(n_list, int)
 
-# From original notebook, cell 35
 def _solve_testtype(
     X_list, y_list, n_list, k0, gamma, solver,
     superset, stat=None, solver_kwargs=None
@@ -173,7 +167,6 @@ def _solve_testtype(
 
     raise ValueError("solver must be 'cd' or 'mip'.")
 
-# From original notebook, cell 36
 def build_supercollection_test(
     X_list, y_list, n_list, k0, superset,
     gamma=(1,1,1,1), M_bar=5, solver="cd",
@@ -192,7 +185,6 @@ def build_supercollection_test(
 
     return [list(S) for S in dict.fromkeys(S_list)]
 
-# From original notebook, cell 37
 def mip_test_multiple(
     X_D1_list, y_D1_list, n_D1_list,
     X_D2_list, y_D2_list, n_D2_list,

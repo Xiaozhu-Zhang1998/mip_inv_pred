@@ -1,6 +1,6 @@
 # Convex Mixed-Integer Programming for Invariant Predictions from Multi-Environment Data
 
-Research code and figure-generation materials accompanying the manuscript by Xiaozhu Zhang, Rahul Mazumder, and Armeen Taeb. See [`paper/manuscript.pdf`](paper/manuscript.pdf).
+Research code and figure-generation materials for the work by Xiaozhu Zhang, Rahul Mazumder, and Armeen Taeb.
 
 We consider two related problems for learning causal predictors from multiple environments using the **least-squares coefficient-and-risk (LSCR) invariance principle**:
 
@@ -44,7 +44,7 @@ The coordinate-descent example does not require Gurobi or external baselines. Se
 
 ## Paper experiments and figures
 
-The committed CSV results can be plotted without rerunning simulations. Each experiment folder has a `run.py` that generates new result CSVs, one or more R plotting scripts, the original manuscript CSVs in `results/`, and the supplied figure PDF in `figures/`.
+The committed CSV results can be plotted without rerunning simulations. Each experiment folder has a `run.py` that generates new result CSVs, one or more R plotting scripts, the provided CSV results in `results/`, and the figure PDF in `figures/`.
 
 | Figure(s) | Experiment folder | Appendix | Plotting |
 | --- | --- | --- | --- |
@@ -72,7 +72,7 @@ python experiments/fig02_solver_comparison/run.py --trials 2 --seed 42
 
 New simulations write to `results/RS_generated.csv`, rather than overwriting original paper results. `--output` specifies another destination. Run `python experiments/<folder>/run.py --help` for the common command-line options. Figure 6 also has `run_tuning.py` for the right-hand tuning panel.
 
-**Important:** the uploaded notebook and the experimental statements of the paper differ in a few parameter settings and trial counts. The initial repository is an executable reorganization of the notebook, not yet a fully reconciled implementation of Appendix G. See [reproducibility notes](docs/reproducibility.md) before claiming an exact rerun of the published experiments.
+**Important:** some current simulation settings differ from the experimental protocol reported in Appendix G. See the [reproducibility notes](docs/reproducibility.md) before treating a new run as an exact reproduction of the published experiments.
 
 ## Project layout
 
@@ -80,8 +80,6 @@ New simulations write to `results/RS_generated.csv`, rather than overwriting ori
 src/invariant_prediction/    Our methods, extensions, and synthetic data
 src/baselines/              Independent baseline implementations and adapters
 experiments/                 Figure-by-figure simulation scripts, original CSVs, R plots
-notebooks/                   Original source notebook for comparison
-paper/                       Reference manuscript
 tests/                       Lightweight method and packaging tests
 docs/                        External dependency, R, and reproducibility notes
 ```
@@ -97,4 +95,4 @@ The generated `data_*.csv` and `true_*.csv` are temporary simulation inputs, not
 
 ## Third-party software, licensing, and attribution
 
-BIP, FAIR, and WVM are **external optional dependencies** and their source code is not included. The notebook-derived local EILLS baseline is credited to its upstream project in `docs/baselines.md`; review its source license before redistributing it. No license has yet been selected for the authors' original code in this repository. Choose and add an appropriate `LICENSE` before publishing it as open-source software.
+BIP, FAIR, and WVM are **external optional dependencies** and their source code is not included. The local EILLS baseline is credited to its upstream project in `docs/baselines.md`; review its source license before redistributing it. No license has yet been selected for the authors' original code in this repository. Choose and add an appropriate `LICENSE` before publishing it as open-source software.

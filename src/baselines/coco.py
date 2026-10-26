@@ -1,7 +1,6 @@
-"""Baseline implementation from the supplied research notebook. See docs/baselines.md."""
+"""Baseline implementation; see docs/baselines.md for sources and setup."""
 import numpy as np
 
-# From original notebook, cell 67
 import numpy as np
 
 def fit_coco_linear_regularized(

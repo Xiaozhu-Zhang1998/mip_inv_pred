@@ -1,7 +1,6 @@
 """Ridge screening and leave-one-environment-out validation."""
 import numpy as np
 
-# From original notebook, cell 53
 def ridge_screening(X_list, y_list, k, lam=1.0, intercept=False):
     """
     X_list: list of X^e, each shape (n_e, p)
@@ -32,7 +31,6 @@ def ridge_screening(X_list, y_list, k, lam=1.0, intercept=False):
 
     return np.sort(S_k), beta_hat
 
-# From original notebook, cell 55
 def loeo_mse(X_list, y_list, gamma1, rho, lam, s_max=None, verbose = 0):
     from .task1 import precompute_stat,cd_msetype
     E = len(X_list)

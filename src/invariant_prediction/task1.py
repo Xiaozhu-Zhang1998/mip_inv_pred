@@ -1,7 +1,6 @@
 """Task 1: invariant prediction via MIQP and coordinate descent."""
 import numpy as np
 
-# From original notebook, cell 3
 def vanilla_msetype(
     X_list, y_list, n_list=None, gamma1=1.0, rho=1.0, lam=1.0,
     s_max=None, beta_bound=100.0, S_start=None, B_start=None,
@@ -131,7 +130,6 @@ def vanilla_msetype(
 
     return model.ObjVal, B, g_sol
 
-# From original notebook, cell 6
 def precompute_stat(X_list, y_list, n_list=None):
     E = len(X_list)
     n_list = np.array([len(y) for y in y_list], float) if n_list is None else np.asarray(n_list, float)
@@ -146,7 +144,6 @@ def precompute_stat(X_list, y_list, n_list=None):
         "Xty_pool": np.sum(Xty, axis=0), "XtX_pool": np.sum(XtX, axis=0)
     }
 
-# From original notebook, cell 7
 def _add_feature_single(beta, S, Ginv, j, XtX, Xty, tol=1e-12):
     S, p = np.asarray(S, int), len(beta)
     if j in S: raise ValueError(f"j={j} is already in S.")
@@ -173,7 +170,6 @@ def _add_feature_single(beta, S, Ginv, j, XtX, Xty, tol=1e-12):
     beta_new[S_new] = Ginv_new @ Xty[S_new]
     return beta_new, S_new, Ginv_new
 
-# From original notebook, cell 8
 def add_feature_to_B_ols(B, S, j, Ginv_pool, Ginv_list, stat, tol=1e-12):
     E = stat["E"]
     B_new = np.zeros_like(B, dtype=float)
@@ -190,7 +186,6 @@ def add_feature_to_B_ols(B, S, j, Ginv_pool, Ginv_list, stat, tol=1e-12):
 
     return B_new, S_new, Ginv_pool_new, Ginv_list_new
 
-# From original notebook, cell 9
 def _remove_feature_single(beta, S, Ginv, j, Xty, tol=1e-12):
     S, p = np.asarray(S, int), len(beta)
     if j not in S: raise ValueError(f"j={j} is not in S.")
@@ -208,7 +203,6 @@ def _remove_feature_single(beta, S, Ginv, j, Xty, tol=1e-12):
     beta_new[S_new] = Ginv_new @ Xty[S_new]
     return beta_new, S_new, Ginv_new
 
-# From original notebook, cell 10
 def remove_feature_from_B_ols(B, S, j, Ginv_pool, Ginv_list, stat, tol=1e-12):
     E = stat["E"]
     B_new = np.zeros_like(B, dtype=float)
@@ -225,7 +219,6 @@ def remove_feature_from_B_ols(B, S, j, Ginv_pool, Ginv_list, stat, tol=1e-12):
         
     return B_new, S_new, Ginv_pool_new, Ginv_list_new
 
-# From original notebook, cell 11
 def compute_Ginv_given_S(S, stat):
     S, E = np.asarray(S, int), stat["E"]
     if len(S) == 0:
@@ -234,7 +227,6 @@ def compute_Ginv_given_S(S, stat):
     Ginv_list = [np.linalg.inv(stat["XtX_list"][e][np.ix_(S, S)]) for e in range(E)]
     return Ginv_pool, Ginv_list
 
-# From original notebook, cell 12
 def compute_B_given_S(S, stat):
     S = np.asarray(S, int)
     E, p = stat["E"], stat["XtX_pool"].shape[0]
@@ -245,7 +237,6 @@ def compute_B_given_S(S, stat):
     for e in range(E): B[e + 1, S] = Ginv_list[e] @ stat["Xty_list"][e][S]
     return B
 
-# From original notebook, cell 13
 def compute_mse_obj_given_S(B, S, stat, gamma1=1.0, rho=1.0, lam=0.0, return_parts=False):
     E, n, w, w_pair = stat["E"], stat["n_list"], stat["w"], stat["w_pair"]
     y2, Xty, XtX = stat["y2_list"], stat["Xty_list"], stat["XtX_list"]
@@ -275,7 +266,6 @@ def compute_mse_obj_given_S(B, S, stat, gamma1=1.0, rho=1.0, lam=0.0, return_par
         }
     return obj
 
-# From original notebook, cell 14
 def cd_msetype(
     stat, lam, gamma1, rho, forbid=None, S_init=(), superset_init=(), tol=1e-10, max_iter=100
 ):
